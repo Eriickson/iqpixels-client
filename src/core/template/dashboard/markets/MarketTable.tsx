@@ -17,7 +17,9 @@ export const MarketTable = () => {
   return (
     <Box>
       <Table variant="simple">
-        <TableCaption>Haga click sobre una fila para ver sus productos</TableCaption>
+        <TableCaption>
+          Haga click sobre una fila para ver sus productos
+        </TableCaption>
         <Thead>
           <Tr>
             <Th>Nombre</Th>
