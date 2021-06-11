@@ -1,12 +1,10 @@
-import { Button } from "@chakra-ui/button";
 import React from "react";
-import { PlusSquareIcon } from "@chakra-ui/icons";
-import { MarketModal } from "./newMarket/MarketModal";
+import { MarketModal } from "@/components";
 
 export const MarketsActions = () => {
   return (
     <>
-      <MarketModal />
+      <MarketModal type="NEW" onSubmit={(data) => console.log(data)} />
     </>
   );
 };
