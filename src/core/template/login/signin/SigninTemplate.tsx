@@ -1,0 +1,29 @@
+import React from "react";
+import { Box, Divider, Text } from "@chakra-ui/react";
+
+// My Components
+import { SigninForm } from "./SigninForm";
+import { SignInFormOnSubmit } from "@/validations";
+
+export const SigninTemplate = () => {
+  async function onSubmit(values: SignInFormOnSubmit) {
+    console.log(values);
+  }
+
+  return (
+    <Box bg="green.100" h="100vh" display="flex" alignItems="center" justifyContent="center">
+      <Box bg="white" p="8" shadow="md" maxWidth="sm" w="full">
+        <Box>
+          <Text fontSize="2xl" fontWeight="semibold" lineHeight="none">
+            Iniciar Sesión
+          </Text>
+          <Text color="gray.400" fontSize="sm" fontWeight="medium">
+            Ingresa a nuestra página web.
+          </Text>
+        </Box>
+        <Divider my="3" />
+        <SigninForm onSubmit={onSubmit} />
+      </Box>
+    </Box>
+  );
+};

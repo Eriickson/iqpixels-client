@@ -1,6 +1,6 @@
-import { FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/react";
 import React, { FC } from "react";
-import { UseFormRegister, FieldValues } from "react-hook-form";
+import { UseFormRegister, DeepMap, FieldValues, FieldError } from "react-hook-form";
 
 interface CustomFormControlProps {
   label: string;
@@ -9,6 +9,7 @@ interface CustomFormControlProps {
   register: UseFormRegister<FieldValues>;
   type?: string;
   defaultValue?: string;
+  error?: DeepMap<FieldValues, FieldError>;
 }
 
 export const CustomFormControl: FC<CustomFormControlProps> = ({
@@ -18,7 +19,10 @@ export const CustomFormControl: FC<CustomFormControlProps> = ({
   register,
   type = "text",
   defaultValue,
+  error,
 }) => {
+  console.log();
+
   return (
     <FormControl id="email" mb="2">
       <FormLabel>{label}</FormLabel>
@@ -30,7 +34,7 @@ export const CustomFormControl: FC<CustomFormControlProps> = ({
         defaultValue={defaultValue}
         {...register(name)}
       />
-      {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+      {error && error[name] && <FormHelperText color="red">{error[name].message}</FormHelperText>}
     </FormControl>
   );
 };
