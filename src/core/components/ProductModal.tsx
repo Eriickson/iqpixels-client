@@ -127,13 +127,6 @@ export const ProductModal: FC<ProductModalProps> = ({
                 defaultValue={direction}
               />
               <CustomFormControl
-                label="URL de Image"
-                name="image"
-                register={register}
-                error={errors}
-                defaultValue={direction}
-              />
-              <CustomFormControl
                 label="Cantidad"
                 name="stock"
                 register={register}

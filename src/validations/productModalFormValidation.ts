@@ -5,7 +5,6 @@ export interface ProductModalFormOnSubmit {
   name: string;
   price: string;
   category: string;
-  image: string;
   stock: string;
 }
 
@@ -17,7 +16,6 @@ const schema = yup.object().shape({
     .required("Precio requerido")
     .min(0, "El precio debe de ser mayor a 0"),
   category: yup.string().required("Categoria requerido"),
-  image: yup.string().required("Dirección requerida"),
   stock: yup
     .number()
     .typeError("La cantidad debe ser un número")
