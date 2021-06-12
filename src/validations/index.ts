@@ -1,2 +1,3 @@
 export * from "./siginFormValidation";
-export * from "./SignUpFormValidation";
+export * from "./signupFormValidation";
+export * from "./marketModalFormValidation";

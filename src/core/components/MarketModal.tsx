@@ -15,16 +15,31 @@ import {
 import { PlusSquareIcon, EditIcon } from "@chakra-ui/icons";
 import { CustomFormControl } from "@/components";
 import { useForm } from "react-hook-form";
+import {
+  marketModalFormResolver,
+  MarketModalFormOnSubmit,
+} from "@/validations";
 
 interface MarketModalProps {
   type?: "EDIT" | "NEW";
   nameMarket?: string;
   direction?: string;
-  onSubmit: (values: any) => void;
+  onSubmit: (values: MarketModalFormOnSubmit) => void;
 }
 
-export const MarketModal: FC<MarketModalProps> = ({ type, nameMarket, direction, onSubmit }) => {
-  const { register, handleSubmit } = useForm();
+export const MarketModal: FC<MarketModalProps> = ({
+  type,
+  nameMarket,
+  direction,
+  onSubmit,
+}) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<MarketModalFormOnSubmit>({
+    resolver: marketModalFormResolver,
+  });
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const editMode = {
@@ -44,7 +59,12 @@ export const MarketModal: FC<MarketModalProps> = ({ type, nameMarket, direction,
   };
   const newMode = {
     ButtonOpen: (
-      <Button rounded="none" leftIcon={<PlusSquareIcon />} colorScheme="blue" onClick={onOpen}>
+      <Button
+        rounded="none"
+        leftIcon={<PlusSquareIcon />}
+        colorScheme="blue"
+        onClick={onOpen}
+      >
         Nueva Bodega
       </Button>
     ),
@@ -56,9 +76,19 @@ export const MarketModal: FC<MarketModalProps> = ({ type, nameMarket, direction,
   return (
     <>
       {mode.ButtonOpen}
-      <Modal closeOnOverlayClick={false} isCentered isOpen={isOpen} onClose={onClose}>
+      <Modal
+        closeOnOverlayClick={false}
+        isCentered
+        isOpen={isOpen}
+        onClose={onClose}
+      >
         <ModalOverlay rounded="none" />
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={handleSubmit((values) => {
+            onSubmit(values);
+            onClose();
+          })}
+        >
           <ModalContent rounded="none" maxW="sm">
             <ModalHeader>
               <Box>
@@ -75,18 +105,26 @@ export const MarketModal: FC<MarketModalProps> = ({ type, nameMarket, direction,
                 label="Nombre"
                 name="name"
                 register={register}
+                error={errors}
                 defaultValue={nameMarket}
               />
               <CustomFormControl
                 label="Dirección"
                 name="direction"
                 register={register}
+                error={errors}
                 defaultValue={direction}
               />
             </ModalBody>
 
             <ModalFooter>
-              <Button variant="ghost" mr={3} colorScheme="red" rounded="none" onClick={onClose}>
+              <Button
+                variant="ghost"
+                mr={3}
+                colorScheme="red"
+                rounded="none"
+                onClick={onClose}
+              >
                 Cancelar
               </Button>
               <Button colorScheme="green" rounded="none" type="submit">

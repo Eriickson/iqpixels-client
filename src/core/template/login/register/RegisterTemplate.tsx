@@ -1,14 +1,27 @@
 import React from "react";
 
+import Router from "next/router";
+
 import { Box, Divider, Text } from "@chakra-ui/react";
 import { RegisterForm } from "./RegisterForm";
+import Cookies from "universal-cookie";
 
 import { SignupFormOnSubmit } from "@/validations";
+import { api } from "@/api";
+
+const cookies = new Cookies();
 
 export const RegisterTemplate = () => {
   async function onSubmit(values: SignupFormOnSubmit) {
-    console.log(values);
+    try {
+      const { data } = await api.post("/login/register", values);
+      cookies.set("token", data.token, { path: "/" });
+      Router.push("/dashboard");
+    } catch (err) {
+      console.log(err);
+    }
   }
+
   return (
     <Box
       bg="green.100"

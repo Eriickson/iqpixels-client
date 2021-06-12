@@ -10,8 +10,9 @@ import {
   TableCaption,
   Text,
 } from "@chakra-ui/react";
-import { MarketModal, ModalDialogDelete } from "@/components";
 import NextLink from "next/link";
+import { EditMarket } from "./EditMarket";
+import { DeleteMarket } from "./DeleteMarket";
 
 export const MarketTable = () => {
   return (
@@ -53,19 +54,8 @@ export const MarketTable = () => {
                 </NextLink>
               </Td>
               <Td w="9rem">
-                <MarketModal
-                  type="EDIT"
-                  nameMarket="Bodega 1"
-                  direction="Calle principal Canabacoa"
-                  onSubmit={(data) => console.log(data)}
-                />
-                <ModalDialogDelete
-                  title="Eliminar Bodega"
-                  description="Estás seguro de que quieres eliminar esta bodega?"
-                  onDelete={() => {
-                    console.log("Eliminada");
-                  }}
-                />
+                <EditMarket idMarket="60c3fc8fffca9e2e30c5c46b" />
+                <DeleteMarket idMarket="60c3fc8fffca9e2e30c5c46b" />
               </Td>
             </Tr>
           ))}
