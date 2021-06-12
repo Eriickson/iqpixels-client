@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Box,
-  TableCaption,
-  Text,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, Box, TableCaption, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { EditMarket } from "./EditMarket";
 import { DeleteMarket } from "./DeleteMarket";
@@ -21,9 +11,7 @@ export const MarketTable = () => {
   return (
     <Box overflowX="auto">
       <Table variant="simple">
-        <TableCaption>
-          Haga click sobre una fila para ver sus productos
-        </TableCaption>
+        <TableCaption>Click en el nombre para ver sus productos</TableCaption>
         <Thead>
           <Tr>
             <Th>Nombre</Th>
@@ -36,31 +24,32 @@ export const MarketTable = () => {
           {markets.map((market, i) => (
             <Tr
               key={i}
-              cursor="pointer"
               onClick={() => {
                 console.log("Hola a esta");
               }}
             >
               <Td>
                 <NextLink href={`/dashboard/markets/${market._id}/products`}>
-                  <Text width="max-content" fontWeight="medium">
+                  <Text
+                    cursor="pointer"
+                    _hover={{ textDecoration: "underline", color: "blue" }}
+                    width="max-content"
+                    fontWeight="medium"
+                    w="full"
+                  >
                     {market.name}
                   </Text>
                 </NextLink>
               </Td>
               <Td>
-                <NextLink href={`/dashboard/markets/${market._id}/products`}>
-                  <Text width="max-content" fontWeight="medium">
-                    {market.direction}
-                  </Text>
-                </NextLink>
+                <Text width="max-content" fontWeight="medium">
+                  {market.direction}
+                </Text>
               </Td>
               <Td>
-                <NextLink href={`/dashboard/markets/${market._id}/products`}>
-                  <Text width="max-content" fontWeight="medium">
-                    {market.products.length}
-                  </Text>
-                </NextLink>
+                <Text width="max-content" fontWeight="medium">
+                  {market.products.length}
+                </Text>
               </Td>
               <Td>
                 <Box width="max-content">

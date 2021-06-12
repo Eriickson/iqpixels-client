@@ -6,8 +6,8 @@ export const indexServer: GetServerSideProps = async (ctx) => {
 
   return {
     props: {},
-    redirect: {
-      destination: "/login/signin",
-    },
+    // redirect: {
+    //   destination: "/login/signin",
+    // },
   };
 };

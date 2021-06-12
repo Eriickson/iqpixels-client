@@ -2,17 +2,17 @@ import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/react"
 import React, { FC } from "react";
 import { UseFormRegister, DeepMap, FieldValues, FieldError } from "react-hook-form";
 
-interface CustomFormControlProps {
+interface CustomFormControlProps<T> {
   label: string;
   name: string;
   placeholder?: string;
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<T>;
   type?: string;
   defaultValue?: string;
   error?: DeepMap<FieldValues, FieldError>;
 }
 
-export const CustomFormControl: FC<CustomFormControlProps> = ({
+export const CustomFormControl: FC<CustomFormControlProps<any>> = ({
   label,
   name,
   placeholder,
