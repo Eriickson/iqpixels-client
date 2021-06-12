@@ -57,7 +57,7 @@ export const MarketTable = () => {
                 </NextLink>
               </Td>
               <Td w="9rem">
-                <EditMarket idMarket={market._id} />
+                <EditMarket market={market} />
                 <DeleteMarket idMarket={market._id} />
               </Td>
             </Tr>

@@ -3,17 +3,18 @@ import { MarketModalFormOnSubmit } from "@/validations";
 import React, { FC } from "react";
 import { api } from "@/api";
 import { useAction } from "@/store";
+import { IMarket } from "@/shared";
 
 interface EditMarketProps {
-  idMarket: string;
+  market: IMarket;
 }
 
-export const EditMarket: FC<EditMarketProps> = ({ idMarket }) => {
+export const EditMarket: FC<EditMarketProps> = ({ market }) => {
   const { updateMarket } = useAction();
 
   async function onSubmit(values: MarketModalFormOnSubmit) {
     try {
-      const { data } = await api.put(`/market/${idMarket}`, values);
+      const { data } = await api.put(`/market/${market._id}`, values);
       updateMarket(data.market);
     } catch (err) {
       console.log(err);
@@ -23,8 +24,8 @@ export const EditMarket: FC<EditMarketProps> = ({ idMarket }) => {
   return (
     <MarketModal
       type="EDIT"
-      nameMarket="Bodega 1"
-      direction="Calle principal Canabacoa"
+      nameMarket={market.name}
+      direction={market.direction}
       onSubmit={onSubmit}
     />
   );
