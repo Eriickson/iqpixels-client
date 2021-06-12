@@ -13,8 +13,11 @@ import {
 import NextLink from "next/link";
 import { EditMarket } from "./EditMarket";
 import { DeleteMarket } from "./DeleteMarket";
+import { useSelector } from "@/store";
 
 export const MarketTable = () => {
+  const { markets } = useSelector((store) => store.market);
+
   return (
     <Box>
       <Table variant="simple">
@@ -30,35 +33,44 @@ export const MarketTable = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {[1, 2, 3, 4, 5, 6, 7].map((item) => (
+          {markets.map((market, i) => (
             <Tr
-              key={item}
+              key={i}
               cursor="pointer"
               onClick={() => {
                 console.log("Hola a esta");
               }}
             >
               <Td>
-                <NextLink href="/dashboard/markets/1/products">
-                  <Text fontWeight="medium">Bodega 1</Text>
+                <NextLink href={`/dashboard/markets/${market._id}/products`}>
+                  <Text fontWeight="medium">{market.name}</Text>
                 </NextLink>
               </Td>
               <Td>
-                <NextLink href="/dashboard/markets/1/products">
-                  <Text fontWeight="medium">Calle Principal Canabacoa</Text>
+                <NextLink href={`/dashboard/markets/${market._id}/products`}>
+                  <Text fontWeight="medium">{market.direction}</Text>
                 </NextLink>
               </Td>
               <Td>
-                <NextLink href="/dashboard/markets/1/products">
-                  <Text fontWeight="medium">25</Text>
+                <NextLink href={`/dashboard/markets/${market._id}/products`}>
+                  <Text fontWeight="medium">{market.products.length}</Text>
                 </NextLink>
               </Td>
               <Td w="9rem">
-                <EditMarket idMarket="60c3fc8fffca9e2e30c5c46b" />
-                <DeleteMarket idMarket="60c3fc8fffca9e2e30c5c46b" />
+                <EditMarket idMarket={market._id} />
+                <DeleteMarket idMarket={market._id} />
               </Td>
             </Tr>
           ))}
+          {!markets.length && (
+            <Tr>
+              <Td colSpan={4}>
+                <Text color="gray.400" textAlign="center">
+                  No se han encontrado resultados
+                </Text>
+              </Td>
+            </Tr>
+          )}
         </Tbody>
       </Table>
     </Box>
