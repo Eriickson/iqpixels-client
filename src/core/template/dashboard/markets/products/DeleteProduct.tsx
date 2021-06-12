@@ -3,17 +3,19 @@ import React, { FC } from "react";
 
 import { api } from "@/api";
 import { useAction } from "@/store";
+import { useRouter } from "next/router";
 
 interface DeleteProductProps {
   idProduct: string;
 }
 
 export const DeleteProduct: FC<DeleteProductProps> = ({ idProduct }) => {
-  // const { removeProduct } = useAction();
+  const { removeProduct } = useAction();
+  const { query } = useRouter();
   async function onDelete() {
     try {
-      await api.delete(`/product/${idProduct}`);
-      // removeProduct(idProduct);
+      await api.delete(`/product/${query.idMarket}/${idProduct}`);
+      removeProduct(idProduct);
     } catch (err) {
       console.log(err);
     }
@@ -21,8 +23,8 @@ export const DeleteProduct: FC<DeleteProductProps> = ({ idProduct }) => {
 
   return (
     <ModalDialogDelete
-      title="Eliminar Bodega"
-      description="Estás seguro de que quieres eliminar esta bodega?"
+      title="Eliminar Producto"
+      description="Estás seguro de que quieres eliminar este producto?"
       onDelete={onDelete}
     />
   );

@@ -5,8 +5,12 @@ import { NextPage } from "next";
 import { ProductsTemplate } from "@/templates";
 import { ProductsPageProps } from "@/server";
 
+import { useAction } from "@/store";
+
 const ProductsPage: NextPage<ProductsPageProps> = ({ products }) => {
-  console.log(products);
+  const { setProducts } = useAction();
+
+  setProducts(products);
 
   return <ProductsTemplate />;
 };
