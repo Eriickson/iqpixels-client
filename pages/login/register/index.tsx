@@ -8,4 +8,5 @@ const RegisterPage: NextPage = () => {
   return <RegisterTemplate />;
 };
 
+export { registerServer as getServerSideProps } from "@/server";
 export default RegisterPage;

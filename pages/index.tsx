@@ -1,6 +1,7 @@
 import React from "react";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { Box, Button } from "@chakra-ui/react";
+import { auth } from "@/utils";
 
 const HomePage: NextPage = () => {
   return (
@@ -10,4 +11,5 @@ const HomePage: NextPage = () => {
   );
 };
 
+export { indexServer as getServerSideProps } from "@/server";
 export default HomePage;

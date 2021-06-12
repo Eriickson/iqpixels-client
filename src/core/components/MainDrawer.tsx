@@ -26,10 +26,6 @@ export const MainDrawer = () => {
       label: "Bodegas",
       href: "/dashboard/markets",
     },
-    {
-      label: "Productos",
-      href: "/dashboard/products",
-    },
   ]);
 
   function onSignOut() {
