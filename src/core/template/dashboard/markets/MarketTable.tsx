@@ -19,7 +19,7 @@ export const MarketTable = () => {
   const { markets } = useSelector((store) => store.market);
 
   return (
-    <Box>
+    <Box overflowX="scroll">
       <Table variant="simple">
         <TableCaption>
           Haga click sobre una fila para ver sus productos
@@ -43,22 +43,30 @@ export const MarketTable = () => {
             >
               <Td>
                 <NextLink href={`/dashboard/markets/${market._id}/products`}>
-                  <Text fontWeight="medium">{market.name}</Text>
+                  <Text width="max-content" fontWeight="medium">
+                    {market.name}
+                  </Text>
                 </NextLink>
               </Td>
               <Td>
                 <NextLink href={`/dashboard/markets/${market._id}/products`}>
-                  <Text fontWeight="medium">{market.direction}</Text>
+                  <Text width="max-content" fontWeight="medium">
+                    {market.direction}
+                  </Text>
                 </NextLink>
               </Td>
               <Td>
                 <NextLink href={`/dashboard/markets/${market._id}/products`}>
-                  <Text fontWeight="medium">{market.products.length}</Text>
+                  <Text width="max-content" fontWeight="medium">
+                    {market.products.length}
+                  </Text>
                 </NextLink>
               </Td>
-              <Td w="9rem">
-                <EditMarket market={market} />
-                <DeleteMarket idMarket={market._id} />
+              <Td>
+                <Box width="max-content">
+                  <EditMarket market={market} />
+                  <DeleteMarket idMarket={market._id} />
+                </Box>
               </Td>
             </Tr>
           ))}
