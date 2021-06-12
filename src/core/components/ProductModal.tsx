@@ -39,6 +39,7 @@ export const ProductModal: FC<ProductModalProps> = ({
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<ProductModalFormOnSubmit>({
     resolver: productModalFormResolver,
     defaultValues,
@@ -62,14 +63,15 @@ export const ProductModal: FC<ProductModalProps> = ({
   };
   const newMode = {
     ButtonOpen: (
-      <Button
+      <IconButton
         rounded="none"
-        leftIcon={<PlusSquareIcon />}
         colorScheme="blue"
+        aria-label="Nuevo Producto"
+        mr="3"
         onClick={onOpen}
       >
-        Nuevo Producto
-      </Button>
+        <PlusSquareIcon />
+      </IconButton>
     ),
     title: "Nuevo producto",
     subtitle: "Agrega un nuevo producto.",
@@ -89,6 +91,7 @@ export const ProductModal: FC<ProductModalProps> = ({
         <form
           onSubmit={handleSubmit((values) => {
             onSubmit(values);
+            reset();
             onClose();
           })}
         >

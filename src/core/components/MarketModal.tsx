@@ -37,6 +37,7 @@ export const MarketModal: FC<MarketModalProps> = ({
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<MarketModalFormOnSubmit>({
     resolver: marketModalFormResolver,
   });
@@ -59,14 +60,15 @@ export const MarketModal: FC<MarketModalProps> = ({
   };
   const newMode = {
     ButtonOpen: (
-      <Button
+      <IconButton
         rounded="none"
-        leftIcon={<PlusSquareIcon />}
         colorScheme="blue"
+        aria-label="Nueva Bodega"
+        mr="3"
         onClick={onOpen}
       >
-        Nueva Bodega
-      </Button>
+        <PlusSquareIcon />
+      </IconButton>
     ),
     title: "Nueva bodega",
     subtitle: "Agrega una nueva bodega.",
@@ -86,6 +88,7 @@ export const MarketModal: FC<MarketModalProps> = ({
         <form
           onSubmit={handleSubmit((values) => {
             onSubmit(values);
+            reset();
             onClose();
           })}
         >
