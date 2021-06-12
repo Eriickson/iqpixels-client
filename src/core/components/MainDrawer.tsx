@@ -13,6 +13,10 @@ import {
 import { HamburgerIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import Link from "next/link";
+import Router from "next/router";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 export const MainDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,12 +32,28 @@ export const MainDrawer = () => {
     },
   ]);
 
+  function onSignOut() {
+    cookies.remove("token", { path: "/" });
+    Router.reload();
+  }
+
   return (
     <>
-      <IconButton mr="3" colorScheme="green" aria-label="target menu" ref={btnRef} onClick={onOpen}>
+      <IconButton
+        mr="3"
+        colorScheme="green"
+        aria-label="target menu"
+        ref={btnRef}
+        onClick={onOpen}
+      >
         <HamburgerIcon />
       </IconButton>
-      <Drawer isOpen={isOpen} placement="left" onClose={onClose} finalFocusRef={btnRef}>
+      <Drawer
+        isOpen={isOpen}
+        placement="left"
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
@@ -56,7 +76,7 @@ export const MainDrawer = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button w="full" colorScheme="red">
+            <Button w="full" colorScheme="red" onClick={onSignOut}>
               Cerrar Sesión
             </Button>
           </DrawerFooter>

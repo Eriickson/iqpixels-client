@@ -19,7 +19,7 @@ export const MarketTable = () => {
   const { markets } = useSelector((store) => store.market);
 
   return (
-    <Box overflowX="scroll">
+    <Box overflowX="auto">
       <Table variant="simple">
         <TableCaption>
           Haga click sobre una fila para ver sus productos
