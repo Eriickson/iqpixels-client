@@ -1,4 +1,4 @@
 export * from "./siginFormValidation";
-export * from "./signupFormValidation";
+export * from "./SignupFormValidation";
 export * from "./marketModalFormValidation";
 export * from "./productModalFormValidation";
